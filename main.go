@@ -69,9 +69,9 @@ LOOP:
 		var files []string
 		files, _ = GetAllFile(pathdDirectory, files)
 		for _, filePath := range files {
-			log.Println("filePath", filePath)
 			fileType := path.Ext(filePath)
 			if fileType != ".xlsx" {
+				log.Println("不是Excel！！！！！ 文件跳过", filePath)
 				continue
 			}
 			ImportFromXLS(filePath, targetStr)
@@ -104,6 +104,8 @@ func FuzzyHanding() string {
 }
 
 func ImportFromXLS(file, targetStr string) {
+	log.Println("filePath", file)
+
 	f, err := excelize.OpenFile(file)
 	if err != nil {
 		log.Println(err)
